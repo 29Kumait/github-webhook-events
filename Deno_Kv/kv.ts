@@ -1,16 +1,18 @@
 /// <reference lib="deno.unstable" />
 
+const URL = Deno.env.get("URL");
+
+const kv = await Deno.openKv(URL);
+
 export async function insertEvent(
     event: { id: string; eventType: string; payload: string },
 ): Promise<boolean> {
-    const kv = await Deno.openKv();
     const key = ["events", event.id];
     const result = await kv.atomic().set(key, event).commit();
     return result.ok;
 }
 
 export async function getAllEvents(): Promise<Event[]> {
-    const kv = await Deno.openKv();
     const events = [];
     for await (const entry of kv.list<Event>({ prefix: ["events"] })) {
         const id = entry.key[1] as string;
@@ -20,7 +22,6 @@ export async function getAllEvents(): Promise<Event[]> {
 }
 
 export async function deleteEventById(eventId: string): Promise<boolean> {
-    const kv = await Deno.openKv();
 
     const eventKey = ["events", eventId];
     const eventRes = await kv.get(eventKey);
