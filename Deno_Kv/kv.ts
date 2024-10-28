@@ -1,8 +1,8 @@
 /// <reference lib="deno.unstable" />
 
-const URL = Deno.env.get("URL");
+// const URL = Deno.env.get("URL");
 
-const kv = await Deno.openKv(URL);
+const kv = await Deno.openKv();
 
 export async function insertEvent(
     event: { id: string; eventType: string; payload: string },
