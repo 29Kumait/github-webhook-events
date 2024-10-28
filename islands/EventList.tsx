@@ -56,7 +56,7 @@ export default function EventList({ initialEvents }: EventListProps) {
                   onClick={() => deleteEvent(event.id)}
                   aria-label="Delete Event"
                 >
-                  ✕
+                  DELETE
                 </Button>
               </div>
             );
