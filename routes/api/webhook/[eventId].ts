@@ -1,5 +1,3 @@
-/// <reference lib="deno.unstable" />
-
 import { Handlers } from "$fresh/server.ts";
 
 import { deleteEventById } from "../../../Deno_Kv/kv.ts";
