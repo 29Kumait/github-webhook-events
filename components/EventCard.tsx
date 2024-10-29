@@ -214,7 +214,7 @@ export default function EventCard({ eventType, eventData }: EventCardProps) {
                     {getEventDescription(eventType)}
                 </h2>
                 <span className="text-sm text-gray-500">
-                    {eventData?.head_commit?.timestamp ? new Date(eventData.head_commit.timestamp).toLocaleString() : eventData?.created_at ? new Date(eventData.created_at).toLocaleString() : "No timestamp available"}
+                    {eventData?.head_commit?.timestamp || eventData?.pull_request?.title || eventData?.issue?.title || eventData?.comment?.html_url ? new Date(eventData.head_commit?.timestamp || eventData.pull_request?.created_at || eventData.issue?.created_at || eventData.comment?.created_at).toLocaleString() : "No timestamp available"}
                 </span>
             </div>
             <p className="text-gray-600 mb-4">
