@@ -13,6 +13,8 @@ export interface Commit {
 
 export interface Event {
     id: string;
-    eventType: string;
+    eventType: EventType;
     payload: string;
 }
+
+export type EventType = "push" | "pull_request" | "issues" | "issue_comment" | "repository_advisory" | "repository_import" | "fork" | "star" | "default";
