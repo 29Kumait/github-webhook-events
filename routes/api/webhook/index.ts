@@ -1,6 +1,12 @@
 import { Handlers } from "$fresh/server.ts";
 import { getAllEvents, insertEvent } from "../../../Deno_Kv/kv.ts";
 
+type EventType = "push" | "pull_request" | "issues" | "issue_comment" | "repository_advisory" | "repository_import" | "fork" | "star" | "default";
+interface Event {
+    id: string;
+    eventType: EventType;
+    payload: string;
+}
 export const handler: Handlers = {
     async GET(_req, _ctx) {
         const events = await getAllEvents();
@@ -22,7 +28,7 @@ export const handler: Handlers = {
         }
 
         const event = { id: deliveryId, eventType, payload };
-        const success = await insertEvent(event);
+        const success = await insertEvent(event as Event);
 
         if (!success) {
             return new Response("Failed to save event", { status: 500 });
