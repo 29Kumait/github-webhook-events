@@ -1,10 +1,10 @@
 /// <reference lib="deno.unstable" />
 
 const kv = await Deno.openKv(Deno.env.get("URL") ?? undefined);
-
+type EventType = "push" | "pull_request" | "issues" | "issue_comment" | "repository_advisory" | "repository_import" | "fork" | "star" | "default";
 interface Event {
     id: string;
-    eventType: string;
+    eventType: EventType;
     payload: string;
 }
 
